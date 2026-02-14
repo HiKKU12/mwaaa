@@ -82,15 +82,10 @@ button:hover {
 </head>
 <body>
 
-<!-- Hidden YouTube Music -->
-<iframe 
-    id="musicPlayer"
-    width="0" 
-    height="0" 
-    src="https://www.youtube.com/embed/u9raS7-NisU?autoplay=1&loop=1&playlist=u9raS7-NisU"
-    frameborder="0"
-    allow="autoplay">
-</iframe>
+<!-- Local MP3 Music -->
+<audio id="bgMusic" loop>
+    <source src="daylight.mp3" type="audio/mpeg">
+</audio>
 
 <!-- Sections / Pages -->
 <div id="page1" class="section" style="display:block;">
@@ -168,12 +163,12 @@ function startTyping(){
     typeWriter();
 }
 
-// Start YouTube music on first tap for mobile
+// Start local MP3 after first tap for mobile
+const bgMusic = document.getElementById("bgMusic");
 let musicStarted = false;
 document.body.addEventListener("click", () => {
     if(!musicStarted){
-        const iframe = document.getElementById("musicPlayer");
-        iframe.src += "&mute=0";
+        bgMusic.play();
         musicStarted = true;
     }
 }, {once:true});
