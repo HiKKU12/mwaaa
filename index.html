@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day 💖</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.section {
+    display: none;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: fadeIn 1s ease;
+}
+
+.section img {
+    width: 200px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+}
+
+h1 {
+    font-size: 20px;
+    color: #ff4d88;
+    line-height: 1.5;
+}
+
+p {
+    font-size: 14px;
+    color: #555;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    background: #ff4d88;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: #ff1a66;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(20px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hidden YouTube Music -->
+<iframe 
+    id="musicPlayer"
+    width="0" 
+    height="0" 
+    src="https://www.youtube.com/embed/u9raS7-NisU?autoplay=1&loop=1&playlist=u9raS7-NisU"
+    frameborder="0"
+    allow="autoplay">
+</iframe>
+
+<!-- Sections / Pages -->
+<div id="page1" class="section" style="display:block;">
+    <img src="1.gif" alt="Valentine GIF">
+    <h1>Happy Valentine's Day baby 💖</h1>
+    <p>Click tap to my surprise</p>
+    <button onclick="showSection('page2')">Tap ❤️</button>
+</div>
+
+<div id="page2" class="section">
+    <img src="2.gif" alt="Flower GIF">
+    <h1>For my baby 💐</h1>
+    <p>hii perd eto na flower mo hahaha sana next sa personal ko na ibigay.</p>
+    <button onclick="showSection('page3')">Next ❤️</button>
+</div>
+
+<div id="page3" class="section">
+    <img src="1.png" alt="Your Flower Pic">
+    <h1>Mwaaaa, iloveu hahahahaa 😘😘</h1>
+    <button onclick="showSection('page4')">Next ❤️</button>
+</div>
+
+<div id="page4" class="section">
+    <img src="2.png" alt="Flower she gave you">
+    <h1>
+    thanks here baby hahaha diko na alam sasabihin ko kagabi eh basta sobrang kilig me kasi ikaw palang nag ssend sakin ng ganyan 🥺
+    </h1>
+    <button onclick="showSection('page5')">Next ❤️</button>
+</div>
+
+<div id="page5" class="section">
+    <img src="3.gif" alt="Writing GIF">
+    <div id="message"></div>
+    <button onclick="showSection('page1')">Back to Start ❤️</button>
+</div>
+
+<script>
+// Floating hearts
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (Math.random()*3+2)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+}
+setInterval(createHeart,400);
+
+// Section switching
+function showSection(id){
+    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    if(id === 'page5') startTyping();
+}
+
+// Typing effect for page5
+const text = `Hii perd sana ayos lang ikaw palage and im here always kahit ano mangyare, thank you rin kasi di ka nag sasawa sakin kahit hindi ako ganon ka daldal, hindi ko masabayan pag vm mo or call pero promise ko pag nasanay me talaga hahaha. Hindi rin ako mag sasawa na intindihin ikaw kahit minsan medyo ooverthink ako pag medyo tahimik ka, nasasanay naman na ako pag ganon ikaw kasi nga avoidant pero wala ako pake basta ikaw gusto ko hindi naman yan rason para lumayo loob ko sayo eh.
+
+Wala rin ako nakakausap na iba baby ikaw lang talaga want ko kahit magsawa ako kaka scroll sa tiktok di ako maghahanap sapat na ikaw sakin hahaha sobra sobra pa.
+
+Thank you sa lahat, ilove u - bai na bai ❤️`;
+let i = 0;
+function startTyping(){
+    i = 0;
+    const messageDiv = document.getElementById("message");
+    messageDiv.innerHTML = '';
+    function typeWriter(){
+        if(i<text.length){
+            messageDiv.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter,35);
+        }
+    }
+    typeWriter();
+}
+
+// Start YouTube music on first tap for mobile
+let musicStarted = false;
+document.body.addEventListener("click", () => {
+    if(!musicStarted){
+        const iframe = document.getElementById("musicPlayer");
+        iframe.src += "&mute=0";
+        musicStarted = true;
+    }
+}, {once:true});
+</script>
+
+</body>
+</html>
